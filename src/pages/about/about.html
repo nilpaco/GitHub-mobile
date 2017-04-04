@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-searchbar
       [showCancelButton]="shouldShowCancel"
-      (ionInput)="onInput($event)"
+      (ionInput)="getRepo($event)"
       (ionCancel)="onCancel($event)"
       [(ngModel)]="username"
       placeholder="Search">
@@ -18,5 +18,10 @@
         <ion-card-content>
             {{ repo.description }}
         </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="noRepos">
+        <ion-card-header>
+          {{noRepos}}
+        </ion-card-header>
     </ion-card>
 </ion-content>  

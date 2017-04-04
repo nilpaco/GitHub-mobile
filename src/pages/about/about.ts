@@ -11,18 +11,23 @@ import { RepoDetailPage } from '../repo-detail/repo-detail';
 })
 export class AboutPage {
   public foundRepos;
+  public noRepos;
   username: string = '';
 
   constructor(public navCtrl: NavController, private github: GitHubService) {
 
   }
 
-  onInput() {
+  getRepo() {
     this.github.getRepos(this.username).subscribe(
       data => {
         this.foundRepos = data.json();
+        this.noRepos = null;
       },
-      err => this.foundRepos = [{name:'User not found.'}],
+      err => {
+        this.noRepos = 'User not found.';
+        this.foundRepos = [];
+      },
       () => console.log('getRepos completed')
     )
   }
